@@ -107,11 +107,12 @@ module.exports = class ArticleIndexView extends Backbone.View
 
   setupPromotedContent: =>
     if @article.get('channel_id') is sd.PC_ARTSY_CHANNEL
+      return unless @article.get('partner_ids')
       new Partner(id: @article.get('partner_ids')?[0]).fetch
-        error: => $('.articles-promoted').hide()
+        error: -> $('.articles-promoted').hide()
         success: (partner) ->
           new Profile(id: partner.get('default_profile_id')).fetch
-            error: => $('.articles-promoted').hide()
+            error: -> $('.articles-promoted').hide()
             success: (profile) ->
               $('#articles-show').prepend promotedTemplate
                 src: profile.bestAvailableImage()
@@ -119,6 +120,7 @@ module.exports = class ArticleIndexView extends Backbone.View
                 href: profile.href()
                 type: profile.profileType()
     else if @article.get('channel_id') is sd.PC_AUCTION_CHANNEL
+      return unless @article.get('auction_ids')
       new Sale(id: @article.get('auction_ids')?[0]).fetch
         error: -> @$el('.articles-promoted').hide()
         success: (sale) ->

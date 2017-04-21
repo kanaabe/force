@@ -133,6 +133,15 @@ describe 'ArticleIndexView', ->
       $('.articles-promoted__explore-button').text().should.equal 'Explore Institution'
       $('.articles-promoted__explore').attr('href').should.equal '/getty'
 
+    it 'handles articles without partner_ids', ->
+      
+      Backbone.sync.args[3][2].success fabricate 'partner'
+      Backbone.sync.args[4][2].success fabricate 'partner_profile'
+      $('.articles-promoted__img').attr('src').should.equal '/images/missing_image.png'
+      $('.articles-promoted__name').text().should.equal 'Gagosian Gallery'
+      $('.articles-promoted__explore-button').text().should.equal 'Explore Institution'
+      $('.articles-promoted__explore').attr('href').should.equal '/getty'
+
   describe 'promoted content auction', ->
 
     before (done) ->
