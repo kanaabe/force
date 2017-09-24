@@ -5,7 +5,7 @@
   "engines": {
     "node": "8.4.0",
     "npm": "4.x.x",
-    "yarn": "0.27.x"
+    "yarn": "1.x.x"
   },
   "scripts": {
     "acceptance": "sh scripts/acceptance.sh",
@@ -93,6 +93,7 @@
     "moment-timezone": "^0.5.5",
     "moment-twitter": "^0.2.0",
     "nib": "^1.1.2",
+    "nightmare": "^2.10.0",
     "nock": "^9.0.11",
     "node-uuid": "^1.4.3",
     "nouislider": "^9.0.0",
@@ -112,8 +113,8 @@
     "react-redux": "^5.0.2",
     "react-router": "^4.1.1",
     "react-router-redux": "^4.0.8",
-    "react-waypoint": "^7.1.0",
     "react-scrollspy": "^3.3.3",
+    "react-waypoint": "^7.1.0",
     "redis": "^2.2.3",
     "redux": "^3.6.0",
     "redux-form": "^6.7.0",
@@ -182,7 +183,6 @@
     "jsdom-global": "^3.0.2",
     "konami-js": "0.0.2",
     "mocha": "^3.1.2",
-    "nightmare": "^2.10.0",
     "openseadragon": "^2.2.1",
     "react-test-renderer": "^15.5.4",
     "rewire": "2.2.0",
