@@ -1,3 +1,4 @@
+import { throttle } from 'underscore'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
@@ -22,7 +23,7 @@ export class FixedHeader extends Component {
   }
 
   componentDidMount () {
-    window.addEventListener('scroll', this.onScroll)
+    window.addEventListener('scroll', throttle(this.onScroll, 200, true))
 
     let isOpen = false
     if (this.props.isOpen) {

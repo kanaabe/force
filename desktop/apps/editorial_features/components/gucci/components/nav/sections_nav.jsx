@@ -31,15 +31,13 @@ SectionsNav.propTypes = {
 }
 
 const navKeyframes = keyframes`
-  0% {
-    height: 0px;
+  from {
+    max-height: 0px;
     opacity: 0;
   }
-  50% {
-    height: auto;
-    opacity: 0;
-  }
-  100% {
+
+  to {
+    max-height: 500px;
     opacity: 1;
   }
 `

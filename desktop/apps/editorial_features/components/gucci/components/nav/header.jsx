@@ -18,6 +18,7 @@ export class Header extends Component {
   }
 
   render () {
+    console.log('rerendering')
     const {
       title,
       isMobile,
@@ -35,7 +36,7 @@ export class Header extends Component {
         />
 
         {/* Gucci Tracking Pixel */}
-        <a href={`https://ad.doubleclick.net/ddm/jump/N32001.3019648ARTSY/B20483079.208849246;sz=1x1;ord${moment().unix()}=?`}>
+        {/* <a href={`https://ad.doubleclick.net/ddm/jump/N32001.3019648ARTSY/B20483079.208849246;sz=1x1;ord${moment().unix()}=?`}>
           <img
             src={`https://ad.doubleclick.net/ddm/ad/N32001.3019648ARTSY/B20483079.208849246;sz=1x1;ord=${moment().unix()};dc_lat=;dc_rdid=;tag_for_child_directed_treatment=?`}
             border='0'
@@ -43,7 +44,7 @@ export class Header extends Component {
             height='1'
             alt='Advertisement'
           />
-        </a>
+        </a> */}
 
         {!isMobile &&
           <div className='title'>
