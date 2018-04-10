@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React, { Component, Fragment } from 'react'
-import { flatten } from 'lodash'
+import { flatten, throttle } from 'lodash'
 import Waypoint from 'react-waypoint'
 import { positronql as _positronql } from 'desktop/lib/positronql'
 import { newsArticlesQuery } from 'desktop/apps/article/queries/articles'
@@ -48,6 +48,10 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
     const date = this.getDateField(article)
     const omit = props.article ? props.article.id : null
     const offset = props.article ? 0 : 6
+
+    this.onDateChange = throttle(this.onDateChange, 500, {
+      trailing: true
+    })
 
     this.state = {
       isLoading: false,
@@ -146,6 +150,13 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
     }
   }
 
+  onMetadataChange = (article: any = null) => {
+    const id = article ? article.id : 'news'
+    const path = article ? `/news/${article.slug}` : '/news'
+    document.title = article ? article.thumbnail_title : 'News'
+    window.history.replaceState({}, id, path)
+  }
+
   hasNewDate = (article, i) => {
     const { articles } = this.state
     const beforeArticle = articles[i - 1] || {}
@@ -187,6 +198,7 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
               isFirstArticle={i === 0}
               nextArticle={articles[i + 1]}
               onDateChange={(date) => this.onDateChange(date)}
+              onMetadataChange={this.onMetadataChange}
             />
             {hasMetaContent &&
               related && (

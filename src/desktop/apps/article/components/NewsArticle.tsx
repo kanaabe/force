@@ -9,6 +9,7 @@ interface Props {
   isFirstArticle: boolean
   nextArticle: any
   onDateChange: any
+  onMetadataChange: any
 }
 
 interface State {
@@ -31,17 +32,22 @@ export class NewsArticle extends Component<Props, State> {
   }
 
   onEnter = ({ previousPosition, currentPosition }) => {
-    const { article, onDateChange } = this.props
+    const {
+      article,
+      onDateChange,
+      onMetadataChange
+    } = this.props
     const { isTruncated } = this.state
     const enteredArticle =
       previousPosition === 'above' && currentPosition === 'inside'
 
     if (enteredArticle) {
       onDateChange(article.published_at)
+
       if (!isTruncated) {
-        this.setMetadata(article)
+        onMetadataChange(article)
       } else {
-        this.setMetadata()
+        onMetadataChange()
       }
     }
   }
@@ -49,7 +55,8 @@ export class NewsArticle extends Component<Props, State> {
   onLeave = ({ previousPosition, currentPosition }) => {
     const {
       nextArticle,
-      onDateChange
+      onDateChange,
+      onMetadataChange
     } = this.props
 
     if (
@@ -58,20 +65,12 @@ export class NewsArticle extends Component<Props, State> {
       currentPosition === 'above'
     ) {
       onDateChange(nextArticle.published_at)
-      // if (nextArticle.isTruncated === false) {
-      //   this.setMetadata(nextArticle)
-      // } else {
-      //   this.setMetadata()
-      // }
-      this.setMetadata()
+      if (nextArticle.isTruncated === false) {
+        onMetadataChange(nextArticle)
+      } else {
+        onMetadataChange()
+      }
     }
-  }
-
-  setMetadata = (article: any = null) => {
-    const id = article ? article.id : 'news'
-    const path = article ? `/news/${article.slug}` : '/news'
-    document.title = article ? article.thumbnail_title : 'News'
-    window.history.replaceState({}, id, path)
   }
 
   render() {
@@ -95,7 +94,7 @@ export class NewsArticle extends Component<Props, State> {
         <Waypoint
           onEnter={(waypointData) => this.onEnter(waypointData)}
           onLeave={(waypointData) => this.onLeave(waypointData)}
-          topOffset="200px"
+          topOffset="30px"
         />
       </Fragment>
     )
