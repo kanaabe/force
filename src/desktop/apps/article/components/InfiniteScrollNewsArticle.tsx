@@ -189,6 +189,7 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
               isTruncated={isTruncated}
               isFirstArticle={i === 0}
               onDateChange={(date) => this.onDateChange(date)}
+              nextArticle={articles[i + 1]}
             />
             {hasMetaContent &&
               related && (

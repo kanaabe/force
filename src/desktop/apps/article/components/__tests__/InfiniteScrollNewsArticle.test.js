@@ -44,8 +44,6 @@ describe('<InfiniteScrollNewsArticle />', () => {
   const {
     DisplayCanvas,
   } = require('reaction/Components/Publishing/Display/Canvas')
-  // let rewire2 = require('rewire')('../NewsArticle.tsx')
-  // let { NewsArticle } = rewire2
 
   beforeEach(() => {
     window.history.replaceState = sinon.stub()
@@ -224,4 +222,13 @@ describe('<InfiniteScrollNewsArticle />', () => {
       getDateField.should.equal(today)
     })
   })
+
+  // describe('#onDateChange', () => {
+  //   it('is throttled', () => {
+  //     const rendered = shallow(<InfiniteScrollNewsArticle {...props} />)
+  //     rendered.instance().onDateChange('123')
+  //     console.log(rendered.state('date'))
+
+  //   })
+  // })
 })
