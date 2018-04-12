@@ -197,6 +197,7 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
               onDateChange={(date) => this.onDateChange(date)}
               nextArticle={articles[i + 1]}
               isHovered={isMobile && activeArticle === article.id}
+              onActiveArticle={this.onActiveArticle}
             />
             {hasMetaContent &&
               related && (

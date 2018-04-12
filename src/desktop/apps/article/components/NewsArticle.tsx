@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Article } from '@artsy/reaction/dist/Components/Publishing'
-import 'intersection-observer'
+// import 'intersection-observer'
 import Observer from '@researchgate/react-intersection-observer'
 
 interface Props {
@@ -8,8 +8,10 @@ interface Props {
   isMobile: boolean
   isTruncated: boolean
   isFirstArticle: boolean
+  isHovered: boolean
   nextArticle: any
   onDateChange: (date: string) => void
+  onActiveArticle: (id: string) => void
 }
 
 interface State {
@@ -78,7 +80,8 @@ export class NewsArticle extends Component<Props, State> {
   onChange = (e) => {
     const {
       article,
-      isMobile
+      isMobile,
+      onActiveArticle
     } = this.props
     const { isTruncated } = this.state
 
@@ -89,7 +92,7 @@ export class NewsArticle extends Component<Props, State> {
         this.setMetadata()
       }
       if (isMobile) {
-        this.setState({ isHovered: true })
+        onActiveArticle(article.id)
       }
     }
   }
@@ -99,9 +102,9 @@ export class NewsArticle extends Component<Props, State> {
       article,
       isMobile,
       isTruncated,
-      isFirstArticle
+      isFirstArticle,
+      isHovered
     } = this.props
-    const { isHovered } = this.state
     const marginTop = isMobile ? '100px' : '200px'
 
     return (
