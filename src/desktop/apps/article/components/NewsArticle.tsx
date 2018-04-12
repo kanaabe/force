@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Article } from '@artsy/reaction/dist/Components/Publishing'
-import Waypoint from 'react-waypoint'
+import 'intersection-observer'
+import Observer from '@researchgate/react-intersection-observer'
 
 interface Props {
   article: any
@@ -13,6 +14,7 @@ interface Props {
 
 interface State {
   isTruncated: boolean
+  isHovered: boolean
 }
 
 export class NewsArticle extends Component<Props, State> {
@@ -20,7 +22,8 @@ export class NewsArticle extends Component<Props, State> {
     super(props)
 
     this.state = {
-      isTruncated: props.isTruncated || false
+      isTruncated: props.isTruncated || false,
+      isHovered: false
     }
   }
 
@@ -72,6 +75,25 @@ export class NewsArticle extends Component<Props, State> {
     }
   }
 
+  onChange = (e) => {
+    const {
+      article,
+      isMobile
+    } = this.props
+    const { isTruncated } = this.state
+
+    if (e.isIntersecting) {
+      if (!isTruncated) {
+        this.setMetadata(article)
+      } else {
+        this.setMetadata()
+      }
+      if (isMobile) {
+        this.setState({ isHovered: true })
+      }
+    }
+  }
+
   render() {
     const {
       article,
@@ -79,24 +101,24 @@ export class NewsArticle extends Component<Props, State> {
       isTruncated,
       isFirstArticle
     } = this.props
+    const { isHovered } = this.state
     const marginTop = isMobile ? '100px' : '200px'
 
     return (
       <Fragment>
-        <Waypoint
-          onEnter={(waypointData) => this.onEnter(waypointData)}
-          topOffset="30px"
+        <Observer
+          onChange={this.onChange}
+          rootMargin={"0% 0% -40%"}
         >
-          <div>
-            <Article
-              article={article}
-              isTruncated={isTruncated}
-              isMobile={isMobile}
-              marginTop={isFirstArticle ? marginTop : null}
-              onExpand={this.onExpand}
-            />
-          </div>
-        </Waypoint>
+          <Article
+            article={article}
+            isTruncated={isTruncated}
+            isMobile={isMobile}
+            marginTop={isFirstArticle ? marginTop : null}
+            onExpand={this.onExpand}
+            isHovered={isHovered}
+          />
+        </Observer>
       </Fragment>
     )
   }

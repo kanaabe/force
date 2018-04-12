@@ -34,6 +34,7 @@ interface State {
   isLoading: boolean
   omit: string
   relatedArticles: object[]
+  activeArticle: string | null
 }
 
 // FIXME: Rewire
@@ -63,6 +64,7 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
       following: setupFollows() || null,
       isEnabled: true,
       relatedArticles: [],
+      activeArticle: null
     }
   }
 
@@ -149,6 +151,10 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
     }
   }
 
+  onActiveArticle = (id) => {
+    this.setState({ activeArticle: id })
+  }
+
   hasNewDate = (article, i) => {
     const { articles } = this.state
     const beforeArticle = articles[i - 1] || {}
@@ -164,7 +170,7 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
   }
 
   renderContent = () => {
-    const { articles, display, relatedArticles } = this.state
+    const { activeArticle, articles, display, relatedArticles } = this.state
     const { isMobile } = this.props
 
     let counter = 0
@@ -190,6 +196,7 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
               isFirstArticle={i === 0}
               onDateChange={(date) => this.onDateChange(date)}
               nextArticle={articles[i + 1]}
+              isHovered={isMobile && activeArticle === article.id}
             />
             {hasMetaContent &&
               related && (

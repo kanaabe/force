@@ -676,6 +676,13 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
+"@researchgate/react-intersection-observer@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@researchgate/react-intersection-observer/-/react-intersection-observer-0.6.0.tgz#505f20b62c8941a035442b61ac448870afb5d8a2"
+  dependencies:
+    invariant "^2.2.2"
+    prop-types "^15.6.0"
+
 "@segment/loosely-validate-event@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@segment/loosely-validate-event/-/loosely-validate-event-1.1.2.tgz#d77840999e3f7e43e74b3b0d43391c1526f793b8"
@@ -5377,6 +5384,10 @@ interact-js@^0.4.6:
 interpret@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.0.3.tgz#cbc35c62eeee73f19ab7b10a801511401afc0f90"
+
+intersection-observer@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/intersection-observer/-/intersection-observer-0.5.0.tgz#9fe8bee3953c755b1485c38efd9633d535775ea6"
 
 invariant@^2.0.0, invariant@^2.2.0, invariant@^2.2.1, invariant@^2.2.2:
   version "2.2.2"
