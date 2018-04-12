@@ -48,6 +48,10 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
     const omit = props.article ? props.article.id : null
     const offset = props.article ? 0 : 6
 
+    this.onDateChange = throttle(this.onDateChange, 500, {
+      trailing: true
+    })
+
     this.state = {
       isLoading: false,
       articles: props.articles,
