@@ -30,7 +30,7 @@ export const articles = (req, res, next) => {
 
       // Email
       let onDailyEditorial = false
-      // Only need to check subscription on mobile
+      // Only need to check subscription for mobile
       if (sd.IS_MOBILE && sd.CURRENT_USER) {
         onDailyEditorial = await subscribedToEditorial(sd.CURRENT_USER.email)
       }
