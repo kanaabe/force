@@ -16,6 +16,18 @@ const path = require('path')
 const Adapter = require('enzyme-adapter-react-16')
 const Enzyme = require('enzyme')
 
+try {
+  window.matchMedia =
+    window.matchMedia ||
+    function() {
+      return {
+        matches: false,
+        addListener: function() {},
+        removeListener: function() {},
+      }
+    }
+} catch (error) {}
+
 // TODO: Look into why this bumps user off of other node command-line tab
 require('dotenv').config({
   path: path.join(process.cwd(), '.env.test'),

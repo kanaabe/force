@@ -1,52 +1,20 @@
-import 'jsdom-global/register'
-import benv from 'benv'
 import React from 'react'
 import { mount } from 'enzyme'
 import { data as sd } from 'sharify'
-import sinon from 'sinon'
-import rewire from 'rewire'
+import { Article, Fixtures } from 'reaction/Components/Publishing'
+import ArticleLayout from 'desktop/apps/article/components/layouts/Article'
+import App from 'desktop/apps/article/components/App'
+import { NewsArticle } from 'reaction/Components/Publishing/Fixtures/Articles'
+
+// const EditorialSignupView = sinon.stub()
 
 describe('<App />', () => {
-  before(done => {
-    benv.setup(() => {
-      benv.expose({
-        $: benv.require('jquery'),
-        jQuery: benv.require('jquery'),
-      })
-      sd.APP_URL = 'http://artsy.net'
-      sd.CURRENT_PATH =
-        '/article/artsy-editorial-surprising-reason-men-women-selfies-differently'
-      sd.CURRENT_USER = { id: '123' }
-      done()
-    })
+  before(() => {
+    sd.APP_URL = 'http://artsy.net'
+    sd.CURRENT_PATH =
+      '/article/artsy-editorial-surprising-reason-men-women-selfies-differently'
+    sd.CURRENT_USER = { id: '123' }
   })
-
-  after(() => {
-    benv.teardown()
-  })
-
-  window.matchMedia = () => {
-    return {
-      matches: false,
-      addListener: () => {},
-      removeListener: () => {},
-    }
-  }
-
-  const ArticleLayoutRewire = rewire('../layouts/Article')
-  const EditorialSignupView = sinon.stub()
-  ArticleLayoutRewire.__set__('EditorialSignupView', EditorialSignupView)
-  const ArticleLayout = ArticleLayoutRewire.default
-
-  const AppRewire = rewire('../App')
-  AppRewire.__set__('ArticleLayout', ArticleLayout)
-  const App = AppRewire.default
-
-  const { Article, Fixtures } = require('reaction/Components/Publishing')
-  // TODO: Export News to Fixtures
-  const {
-    NewsArticle,
-  } = require('reaction/Components/Publishing/Fixtures/Articles')
 
   it('renders a standard article', () => {
     const rendered = mount(

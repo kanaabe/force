@@ -6,11 +6,8 @@ import { Article } from 'reaction/Components/Publishing'
 import { ContextProvider } from 'reaction/Components/Artsy'
 import { InfiniteScrollNewsArticle } from './InfiniteScrollNewsArticle.tsx'
 import { EditButton } from 'desktop/apps/article/components/EditButton'
-import _ArticleLayout from './layouts/Article'
+import ArticleLayout from './layouts/Article'
 import { data as sd } from 'sharify'
-
-// FIXME: Rewire
-let ArticleLayout = _ArticleLayout
 
 export default hot(module)(
   class App extends React.Component {
